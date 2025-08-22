@@ -9,12 +9,12 @@ export class AuthController {
     @Redirect()
     googleAuth(){
         const url = this.authService.generateAuthUrl();
-        return {url};
+        return { message: 'Connected to Google successfully!', url };
     }
 
     @Get('/google/callback')
     async googleAuthCallback(@Query('code') code: string){
         const token = await this.authService.getTokens(code);
-        return {token};
+        return { message: 'Authentication complete. Tokens saved.', token };
     }
 }
